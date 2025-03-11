@@ -1,47 +1,54 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+// Remove imports when using CDN approach
+// import * as THREE from 'three';
+// import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 console.log("Three.js script loaded");
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-// Keep track of the mouse position, so we can make the eye move
+// Add a simple cube to verify scene rendering
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+// Rest of your code...
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
-
-// Keep the 3D object on a global variable so we can access it later
 let object;
-
-// OrbitControls allow the camera to move around the scene
 let controls;
-
-// Set which object to render
 let objToRender = 'MocapMan';
 
 // Instantiate a loader for the .gltf file
-const loader = new GLTFLoader();
+const loader = new THREE.GLTFLoader();
 
 // Load the file
 loader.load(
-  `./models/${objToRender}.gltf`, // Changed from ./models/${objToRender}/scene.gltf
+  `./models/${objToRender}.gltf`,
   function (gltf) {
     console.log("Model loaded successfully");
-    // If the file is loaded, add it to the scene
     object = gltf.scene;
+    
+    // Scale and position the model if needed
+    object.scale.set(1, 1, 1); // Adjust scale if model is too large/small
+    object.position.set(0, 0, 0); // Center the model
+    
     scene.add(object);
   },
   function (xhr) {
-    // While it is loading, log the progress
     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
   },
   function (error) {
-    // If there is an error, log it
     console.error("Error loading model:", error);
   }
 );
 
+// Move camera closer
+camera.position.z = 5; // Start closer to see if anything renders
+
+// Rest of your code...
 // Instantiate a new renderer and set its size
 const renderer = new THREE.WebGLRenderer({ alpha: true }); // Alpha: true allows for the transparent background
 renderer.setSize(window.innerWidth, window.innerHeight);
