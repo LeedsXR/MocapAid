@@ -1,0 +1,203 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    overflow: hidden;
+}
+
+/* Layout */
+.app-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    height: 100vh;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #34495e;
+    margin-bottom: 20px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu-item {
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+    background-color: #34495e;
+}
+
+.menu-item.active {
+    background-color: #3498db;
+    font-weight: bold;
+}
+
+/* Content area */
+.content {
+    flex: 1;
+    overflow: hidden; /* Change from overflow-y: auto to prevent scrolling */
+    padding: 15px;    /* Slightly reduced padding */
+    background-color: #ecf0f1;
+}
+
+/* Adjust page height */
+.page {
+    display: none;
+    height: 100%;      /* Use 100% instead of calc */
+    overflow: hidden;  /* Prevent scrolling */
+}
+
+.page.active {
+    display: block;
+}
+
+h1 {
+    margin-bottom: 15px; /* Smaller margin */
+    color: #2c3e50;
+}
+
+/* Adjust split layout height */
+.split-layout {
+    display: flex;
+    height: calc(100% - 50px); /* Smaller calculation to fit in page */
+    gap: 15px;                 /* Slightly smaller gap */
+}
+
+.split-left, .split-right {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 8px;  /* Add padding around both sides */
+    background-color: white; /* Add background for padding area */
+}
+
+/* Maintain aspect ratio but remove min-height */
+.model-viewer {
+    background-color: #000;
+    height: 100%;
+    position: relative;
+    width: 100%;       /* Let it fill container width */
+    border-radius: 6px; /* Add rounded corners to match outer container */
+    overflow: hidden;   /* Keep the content within rounded corners */
+}
+
+/* Ensure container fills model viewer */
+#container {
+    width: 100%;
+    height: 100%;
+    position: relative; /* Change from absolute to relative */
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: Arial;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 100;
+}
+
+/* Slideshow proportions */
+.slideshow-container {
+    position: relative;
+    height: 60%;
+    background-color: #ddd;
+    min-height: 0;     /* Remove min-height constraint */
+    border-radius: 6px; /* Add rounded corners to match container */
+    overflow: hidden;   /* Keep the content within rounded corners */
+    margin-bottom: 8px; /* Add space between slideshow and text */
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Text area proportions */
+.slide-info {
+    padding: 18px;     /* Increased padding */
+    height: calc(40% - 8px); /* Adjust height to account for margin above */
+    overflow-y: auto;  /* Keep scroll here if needed */
+    background-color: white;
+    border-radius: 6px; /* Add rounded corners */
+    border: 1px solid #e0e0e0; /* Add subtle border */
+}
+
+.slide-info h2 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.slide-text {
+    display: none;
+}
+
+.slide-text.active {
+    display: block;
+}
+
