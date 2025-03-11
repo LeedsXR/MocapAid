@@ -1,20 +1,4 @@
-/* Reset default browser styles */
-* {
+body {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
   }
   
-  body, html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    background-color: #000; /* Black background in case the canvas doesn't render */
-  }
-  
-  /* 3D container that holds the Three.js canvas */
-  #container3D {
-    position: absolute;
-    top: 0;
-    left:

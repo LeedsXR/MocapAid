@@ -1,25 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>A simple Three.JS App</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <header>
-      <h1>A simple three.js app</h1>
-    </header>
-
-    <main>
-      <div id="container3D"></div>
-    </main>
-
-    <!-- Import Three.js from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/loaders/GLTFLoader.js"></script>
-    
-    <!-- Use type="module" only if you're using ES6 module imports -->
-    <script src="js/main.js"></script>
-  </body>
-</html>
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three/examples/jsm/"
+      }
+    }
+  </script>
