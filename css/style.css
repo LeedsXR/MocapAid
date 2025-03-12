@@ -201,3 +201,154 @@ h1 {
     display: block;
 }
 
+/* Add these ROM page styles at the end of your file */
+
+/* Add these ROM page styles at the end of your file */
+
+/* ROM page styles */
+.rom-slideshow-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+    height: calc(100% - 100px); /* Increased to account for larger header */
+    overflow: hidden;
+}
+
+.rom-slides-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.rom-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.rom-slide.active {
+    display: block;
+}
+
+.rom-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.rom-media {
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.rom-media img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.rom-details {
+    display: flex;
+    height: 40%;
+}
+
+.rom-info {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.rom-joints {
+    flex: 1;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 20px;
+}
+
+.rom-slide h2 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.rom-slide h3 {
+    margin-bottom: 10px;
+    color: #3498db;
+    font-size: 16px;
+}
+
+.rom-joints ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.rom-joints li {
+    margin-bottom: 5px;
+}
+
+.rom-prev, .rom-next {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.rom-prev { left: 10px; }
+.rom-next { right: 10px; }
+
+/* Add these styles for the ROM header */
+
+.rom-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.rom-header h1 {
+    margin-bottom: 10px;
+}
+
+.rom-slide-title-container {
+    background-color: #3498db;
+    padding: 8px 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+    min-width: 200px;
+    text-align: center;
+}
+
+.rom-slide-title {
+    font-size: 18px;
+    color: white;
+    margin: 0;
+    display: none;
+    font-weight: bold;
+}
+
+.rom-slide-title.active {
+    display: block;
+}

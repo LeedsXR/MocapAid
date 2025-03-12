@@ -15,36 +15,48 @@ window.onload = function() {
         setTimeout(initializeModelViewer, 100);
     });
     let romCurrentSlide = 0;
-    const romSlides = document.querySelectorAll('.rom-slide');
+const romSlides = document.querySelectorAll('.rom-slide');
 
-    if (romSlides.length > 0) {
-        document.querySelectorAll('.rom-slideshow-container .prev').forEach(btn => {
-            btn.addEventListener('click', function() {
-                showROMSlide(romCurrentSlide - 1);
-            });
+if (romSlides.length > 0) {
+    document.querySelectorAll('.rom-slideshow-container .rom-prev').forEach(btn => {
+        btn.addEventListener('click', function() {
+            showROMSlide(romCurrentSlide - 1);
         });
+    });
 
-        document.querySelectorAll('.rom-slideshow-container .next').forEach(btn => {
-            btn.addEventListener('click', function() {
-                showROMSlide(romCurrentSlide + 1);
-            });
+    document.querySelectorAll('.rom-slideshow-container .rom-next').forEach(btn => {
+        btn.addEventListener('click', function() {
+            showROMSlide(romCurrentSlide + 1);
         });
-    }
+    });
+}
 
-    function showROMSlide(n) {
-        if (romSlides.length === 0) return;
-        
-        // Reset current slides
-        romSlides.forEach(slide => slide.classList.remove('active'));
-        
-        // Handle index wrapping
-        romCurrentSlide = n;
-        if (romCurrentSlide >= romSlides.length) romCurrentSlide = 0;
-        if (romCurrentSlide < 0) romCurrentSlide = romSlides.length - 1;
-        
-        // Show new slide
-        romSlides[romCurrentSlide].classList.add('active');
-    }
+// Update the showROMSlide function:
+
+function showROMSlide(n) {
+    if (romSlides.length === 0) return;
+    
+    // Reset current slides and titles
+    romSlides.forEach(slide => slide.classList.remove('active'));
+    document.querySelectorAll('.rom-slide-title').forEach(title => title.classList.remove('active'));
+    
+    // Handle index wrapping
+    romCurrentSlide = n;
+    if (romCurrentSlide >= romSlides.length) romCurrentSlide = 0;
+    if (romCurrentSlide < 0) romCurrentSlide = romSlides.length - 1;
+    
+    // Show new slide and title
+    romSlides[romCurrentSlide].classList.add('active');
+    document.querySelector(`.rom-slide-title[data-slide="${romCurrentSlide}"]`).classList.add('active');
+}
+
+// Add click events to the slide titles
+document.querySelectorAll('.rom-slide-title').forEach(title => {
+    title.addEventListener('click', function() {
+        const slideIndex = parseInt(this.getAttribute('data-slide'));
+        showROMSlide(slideIndex);
+    });
+});
 };
 
     function initializeModelViewer() {
