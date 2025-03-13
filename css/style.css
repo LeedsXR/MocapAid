@@ -362,3 +362,31 @@ h1 {
 #a-pose .slide img {
     max-height: 90%; /* Allow images to take up more vertical space */
 }
+
+/* Fix bullet points in troubleshooting list */
+.troubleshooting-list {
+    list-style-type: disc !important; /* Force bullet points */
+    padding-left: 20px; /* Add proper indentation */
+}
+
+.troubleshooting-list ul {
+    list-style-type: circle !important; /* Different bullet style for nested lists */
+    padding-left: 20px; /* Indent nested lists */
+    margin-top: 5px; /* Space above nested lists */
+    margin-bottom: 10px; /* Space below nested lists */
+}
+
+.troubleshooting-list li {
+    margin-bottom: 8px; /* Add space between list items */
+    display: list-item !important; /* Force list item display */
+}
+
+/* Fix text formatting */
+.info-text h3 {
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.info-text p {
+    margin-bottom: 15px;
+}

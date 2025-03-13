@@ -131,6 +131,10 @@ scene.add(leftSideLight);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         
+        // Add this after you create the OrbitControls
+        controls.minDistance = 0.1;  // Allow zooming in very close
+        controls.maxDistance = Infinity; // Allow zooming out infinitely
+
         // Use this code to load your model correctly
 const loader = new THREE.GLTFLoader();
 const modelUrl = './models/MocapFinal.gltf'; // Use the correct filename and extension
@@ -179,8 +183,8 @@ loader.load(
         controls.update();
 
         // Adjust zoom constraints to ensure model visibility
-        controls.minDistance = maxDim * 0.4;  // Allow closer zoom if needed
-        controls.maxDistance = maxDim * 2.5;  // Allow zooming out further if needed
+        controls.minDistance = maxDim * 0.05;  // Allow closer zoom if needed
+        controls.maxDistance = maxDim * 1;  // Allow zooming out further if needed
     },
     function(xhr) {
         // Progress callback

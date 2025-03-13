@@ -26,28 +26,113 @@
                     <!-- Swapped positions: Slideshow now on left -->
                     <div class="split-left">
                         <div class="slideshow-container">
+                            <!-- Slide 1 -->
                             <div class="slide active">
-                                <img src="images/marker1.jpg" alt="Marker Placement 1">
+                                <img src="images/rom/markerplacement/Production - Front and Back.jpg" alt="Front View Markers">
                             </div>
+                            
+                            <!-- Slide 2 -->
                             <div class="slide">
-                                <img src="images/marker2.jpg" alt="Marker Placement 2">
+                                <img src="images/rom/markerplacement/Production - Front and Side.jpg" alt="Back View Markers">
                             </div>
+                            
+                            <!-- Slide 3 -->
                             <div class="slide">
-                                <img src="images/marker3.jpg" alt="Marker Placement 3">
+                                <img src="images/rom/markerplacement/Elbows.png" alt="Side View Markers">
                             </div>
+                            
+                            <!-- Slide 4 -->
+                            <div class="slide">
+                                <img src="images/rom/markerplacement/Foot Markers.png" alt="Head Markers">
+                            </div>
+                            
+                            <!-- Slide 5 -->
+                            <div class="slide">
+                                <img src="images/rom/markerplacement/10 Finger Marker - 0b - Combined.jpg" alt="Arm Markers">
+                            </div>
+                            
+                            <!-- Slide 6 -->
+                            <div class="slide">
+                                <img src="images/rom/markerplacement/10-FingerFlex-Small.gif" alt="Hand Markers">
+                            </div>
+                            
+                            <!-- Slide 7 -->
+                            <div class="slide">
+                                <img src="images/rom/markerplacement/10-FingerWave-Small.gif" alt="Leg Markers">
+                            </div>
+                            
+                            <!-- Slide 8 -->
+                            <div class="slide">
+                                <img src="images/rom/markerplacement/Wrist and Hand Markers.png" alt="Feet Markers">
+                            </div>
+                            
+                            <!-- Slide 9 -->
+                            <div class="slide">
+                                <img src="images/rom/markerplacement/10fingersMultipleAngles.png" alt="Complete Marker Set">
+                            </div>
+                            
+                            <!-- Navigation buttons -->
                             <button class="prev">&#10094;</button>
                             <button class="next">&#10095;</button>
                         </div>
+                        
                         <div class="slide-info">
-                            <h2>Marker Placement Guide</h2>
+                            <h2>Marker Placement</h2>
+                            <!-- Slide 1 Text -->
                             <div class="slide-text active">
-                                <p>Step 1: Place markers on the indicated points for proper motion capture tracking. The red markers should be positioned on major joints.</p>
+                                <p>Place markers on the indicated points for proper motion capture tracking. This marker set uses 57 markers (without fingers).</p>
                             </div>
+                            
+                            <!-- Slide 2 Text -->
                             <div class="slide-text">
-                                <p>Step 2: Ensure symmetrical placement on both sides of the body. Precision is key for accurate motion data.</p>
+                                <p>Place markers on the indicated points for proper motion capture tracking. This marker set uses 57 markers (without fingers).</p>
                             </div>
+                            
+                            <!-- Slide 3 Text -->
                             <div class="slide-text">
-                                <p>Step 3: Check that all markers are visible from multiple camera angles to minimize data loss during capture.</p>
+                                <p><strong>Elbows:</strong> When placing markers on the performer's elbow and knee joints, on the outside of the elbow/knee place the marker on the joint, and on the inside of the elbow/knee place the marker above the joint. See the following images for more details on where to place the markers on the performer's arms.
+
+                                </p>
+                            </div>
+                            
+                            <!-- Slide 4 Text -->
+                            <div class="slide-text">
+                                <p><strong>Foot Markers:</strong> Ensure that the foot markers are placed correctly:</p>
+                                <ul>
+                                    <li>Place the toe marker as far forward as possible on the foot while also facing upward</li>
+                                    <li>For the other three markers (heel marker and two on either side of the front of the foot), ensure they:</li>
+                                    <ul>
+                                        <li>Are in the same plane as the marker on the front of the foot</li>
+                                        <li>Are as low (i.e., near to the floor) as possible</li>
+                                    </ul>
+                                    <li>For optimal performance, ensure that the toe marker is higher than the three markers that form this plane</li>
+                                </ul>
+                                <p>The image shows the placement of these four foot markers on the performer's shoes.</p>
+                            </div>
+                            
+                            <!-- Slide 5 Text -->
+                            <div class="slide-text">
+                                <p><strong>Arm Markers:</strong> Arm markers should be placed at joint centers and away from areas of skin deformation.</p>
+                            </div>
+                            
+                            <!-- Slide 6 Text -->
+                            <div class="slide-text">
+                                <p><strong>Hand Markers:</strong> For detailed hand tracking, markers should be placed on knuckles and finger joints as shown.</p>
+                            </div>
+                            
+                            <!-- Slide 7 Text -->
+                            <div class="slide-text">
+                                <p><strong>Leg Markers:</strong> Leg markers should follow the bone structure while avoiding areas with significant muscle deformation.</p>
+                            </div>
+                            
+                            <!-- Slide 8 Text -->
+                            <div class="slide-text">
+                                <p><strong>Feet Markers:</strong> Feet markers must be precisely positioned to capture proper foot roll and ankle movement.</p>
+                            </div>
+                            
+                            <!-- Slide 9 Text -->
+                            <div class="slide-text">
+                                <p><strong>Complete Set:</strong> The full marker set should be symmetrical and follow anatomical landmarks. Check for proper visibility from multiple camera angles.</p>
                             </div>
                         </div>
                     </div>
@@ -105,36 +190,41 @@
                         <div class="info-container">
                             <h2>A-pose Troubleshooting</h2>
                             <div class="info-text">
-                                <p>My subject doesn't pass the A-pose detection stage.</p>
-
-<p>Look in the log for an explanation as to why the A-pose cannot be detected or why it has been rejected.</p>
-
-<ul>
-    <li>Are any markers reported as missing? If yes:
-        <ul>
-            <li>Is the correct skeleton template being used?</li>
-            <li>Are all the required markers attached to the subject?</li>
-            <li>Does the subject calibration volume include all the reconstructions?</li>
-            <li><strong>Reminder:</strong> Missing markers will glow red.</li>
-        </ul>
-    </li>
-    <li>Does the subject also seem to have labeling issues? If yes:
-        <ul>
-            <li>If labeling clusters are attached to the subject, have you created them in Shogun? Have you verified that the labeling clusters you have created are selected?</li>
-            <li>Is the subject standing in a valid A-pose? A valid A-pose assumes that the subject:
-                <ul>
-                    <li>Stands straight</li>
-                    <li>Has their feet pointing forward (i.e., the feet are not splayed)</li>
-                    <li>Has their palms pointing to the floor</li>
-                    <li>Poses their arms at an angle of 45 degrees from the trunk</li>
-                    <li>Poses their arms in such a way that they lie in the plane of the torso.</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>Are there any joints reported as out-of-range? If yes:
-        <ul>
-            <li>Is the A-pose valid (see the above criteria)?</li>
+                                <h3>My subject doesn't pass the A-pose detection stage.</h3>
+                                
+                                <p>Look in the log for an explanation as to why the A-pose cannot be detected or why it has been rejected.</p>
+                                
+                                <ul class="troubleshooting-list">
+                                    <li><strong>Are any markers reported as missing?</strong> If yes:
+                                        <ul>
+                                            <li>Is the correct skeleton template being used?</li>
+                                            <li>Are all the required markers attached to the subject?</li>
+                                            <li>Does the subject calibration volume include all the reconstructions?</li>
+                                            <li><strong>Reminder:</strong> Missing markers will glow red.</li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li><strong>Does the subject have labeling issues?</strong> If yes:
+                                        <ul>
+                                            <li>If labeling clusters are attached to the subject, have you created them in Shogun?</li>
+                                            <li>Have you verified that the labeling clusters you created are selected?</li>
+                                            <li>Is the subject standing in a valid A-pose? A valid A-pose requires:
+                                                <ul>
+                                                    <li>Standing straight</li>
+                                                    <li>Feet pointing forward (not splayed)</li>
+                                                    <li>Palms pointing to the floor</li>
+                                                    <li>Arms at a 45-degree angle from the trunk</li>
+                                                    <li>Arms positioned in the plane of the torso</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Are any joints reported as out-of-range?</strong> If yes:
+                                        <ul>
+                                            <li>Is the A-pose valid? (see criteria above)</li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
