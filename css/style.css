@@ -352,3 +352,13 @@ h1 {
 .rom-slide-title.active {
     display: block;
 }
+
+/* Add this to your CSS to make the A-pose slideshow taller */
+#a-pose .slideshow-container {
+    height: 500px; /* Increased height since no text box below */
+    margin-bottom: 0; /* Remove bottom margin since no text box */
+}
+
+#a-pose .slide img {
+    max-height: 90%; /* Allow images to take up more vertical space */
+}

@@ -1,5 +1,14 @@
 console.log('Script executing...');
 
+// Add these at the TOP of your main.js file
+THREE.Cache.enabled = false;
+THREE.DefaultLoadingManager.onStart = function(url) {
+    console.log('Started loading: ' + url);
+};
+THREE.DefaultLoadingManager.onError = function(url) {
+    console.error('Error loading: ' + url);
+};
+
 // Wait for the page to load
 window.onload = function() {
     console.log('Window loaded');
@@ -122,65 +131,73 @@ scene.add(leftSideLight);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         
-        // Load GLTF model
-        const loader = new THREE.GLTFLoader();
-        const modelPath = './models/MocapMan.gltf';
+        // Use this code to load your model correctly
+const loader = new THREE.GLTFLoader();
+const modelUrl = './models/MocapFinal.gltf'; // Use the correct filename and extension
+
+// Add proper loading callbacks
+loader.load(
+    modelUrl,
+    function(gltf) {
+        console.log('Model loaded successfully!');
+        document.getElementById('loadingText').style.display = 'none';
         
-        loader.load(
-            modelPath,
-            function(gltf) {
-                console.log('Model loaded successfully!');
-                document.getElementById('loadingText').style.display = 'none';
-                
-                const model = gltf.scene;
-                
-                // Remove the cube when model is loaded
-                scene.remove(cube);
-                
-                // Add model to scene
-                scene.add(model);
-                
-                // Calculate bounding box
-                const box = new THREE.Box3().setFromObject(model);
-                const center = box.getCenter(new THREE.Vector3());
-                const size = box.getSize(new THREE.Vector3());
-                
-                // Get the largest dimension of the model
-                const maxDim = Math.max(size.x, size.y, size.z);
-                const fov = camera.fov * (Math.PI / 180);
-                const cameraZ = Math.abs(maxDim / Math.sin(fov / 2)) * 0.5;
-                
-                // Position camera slightly above and in front of the model to create downward view
-                camera.position.set(
-                    center.x,                   // Same X as center
-                    center.y + (size.y * 0.4),  // Position camera above the center by 30% of model height
-                    center.z + cameraZ          // Same Z distance as before
-                );
-                
-                // Ensure camera's up vector is set correctly
-                camera.up.set(0, 1, 0);
-                
-                // Point camera at model center (creates the downward angle)
-                camera.lookAt(center);
-                
-                // Set orbit controls to rotate around model center
-                controls.target.set(center.x, center.y, center.z);
-                controls.update();
-                
-                
-                console.log('Camera positioned for downward view at:', camera.position);
-                console.log('Looking at center:', center);
-            },
-            function(xhr) {
-                const percent = (xhr.loaded / xhr.total * 100).toFixed(0);
-                console.log(percent + '% loaded');
-                document.getElementById('loadingText').textContent = `Loading model: ${percent}%`;
-            },
-            function(error) {
-                console.error('Error loading model:', error);
-                document.getElementById('loadingText').textContent = 'Error loading model: ' + error.message;
-            }
+        const model = gltf.scene;
+        scene.add(model);
+        
+        // Remove the cube when model is loaded
+        if (cube && scene.getObjectById(cube.id)) {
+            scene.remove(cube);
+        }
+        
+        // Center the model
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.x = -center.x;
+        model.position.y = -center.y;
+        model.position.z = -center.z;
+        
+        // Adjust camera to frame the model closer
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+
+        // Adjust camera position to frame the model with less downward angle
+        camera.position.set(
+            0,                              // Centered horizontally
+            model.position.y + size.y*0.77, // Lowered height (was 0.9)
+            maxDim * 0.65                   // Keep same distance
         );
+
+        // Adjust the look target point to maintain viewing angle
+        controls.target.set(
+            0,                              // Centered horizontally 
+            model.position.y + size.y*0.58, // Adjusted target point (was 0.7)
+            0
+        );
+
+        // Apply the camera changes
+        controls.update();
+
+        // Adjust zoom constraints to ensure model visibility
+        controls.minDistance = maxDim * 0.4;  // Allow closer zoom if needed
+        controls.maxDistance = maxDim * 2.5;  // Allow zooming out further if needed
+    },
+    function(xhr) {
+        // Progress callback
+        if (xhr.lengthComputable) {
+            const percentComplete = xhr.loaded / xhr.total * 100;
+            console.log('Loading: ' + percentComplete.toFixed(2) + '%');
+            document.getElementById('loadingText').textContent = 
+                'Loading: ' + percentComplete.toFixed(0) + '%';
+        }
+    },
+    function(error) {
+        // Error callback
+        console.error('Error loading model:', error);
+        document.getElementById('loadingText').textContent = 
+            'Error loading model. Check console for details.';
+    }
+);
         
         // Animation loop
         function animate() {

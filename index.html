@@ -61,34 +61,81 @@
                 </div>
             </div>
 
-            <!-- A Pose Page -->
+            <!-- A Pose Page with slideshow only (no text descriptions) -->
             <div id="a-pose" class="page">
-                <h1>A-pose Guide</h1>
+                <h1>A-pose</h1>
                 <div class="split-layout">
+                    <!-- Left side with slideshow only -->
                     <div class="split-left">
-                        <div class="apose-image-container">
-                            <img src="./images/APose.png" alt="A-pose reference" />
+                        <div class="slideshow-container">
+                            <!-- Slide 1 -->
+                            <div class="slide active">
+                                <img src="./images/rom/APose.png" alt="A-pose front view">
+                            </div>
+                            
+                            <!-- Slide 2 -->
+                            <div class="slide">
+                                <img src="./images/rom/APoseSide.png" alt="A-pose side view">
+                            </div>
+                            
+                            <!-- Slide 3 -->
+                            <div class="slide">
+                                <img src="./images/rom/APoseBack.png" alt="A-pose back view">
+                            </div>
+                            
+                            <!-- Slide 4 -->
+                            <div class="slide">
+                                <img src="./images/rom/APoseCommon.png" alt="Common A-pose mistakes">
+                            </div>
+                            
+                            <!-- Slide 5 -->
+                            <div class="slide">
+                                <img src="./images/rom/APoseCorrect.png" alt="Correct A-pose example">
+                            </div>
+                            
+                            <!-- Navigation buttons -->
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
+                        <!-- Removed the slide-info section that contained text descriptions -->
                     </div>
+                    
+                    <!-- Right side with troubleshooting - unchanged -->
                     <div class="split-right">
-                        <h2>A-pose Troubleshooting</h2>
-                        <div class="apose-text">
-                            <p>The A-pose is critical for proper motion capture initialization. Ensure your subject stands with:</p>
-                            <ul>
-                                <li>Arms extended about 45° from the body</li>
-                                <li>Palms facing down</li>
-                                <li>Feet shoulder-width apart</li>
-                                <li>Toes pointing forward</li>
-                                <li>Back straight</li>
-                                <li>Head looking forward</li>
-                            </ul>
-                            <p>Common issues include:</p>
-                            <ul>
-                                <li>Arms too high or too low</li>
-                                <li>Hands not properly aligned</li>
-                                <li>Feet positioned incorrectly</li>
-                                <li>Poor posture affecting overall alignment</li>
-                            </ul>
+                        <div class="info-container">
+                            <h2>A-pose Troubleshooting</h2>
+                            <div class="info-text">
+                                <p>My subject doesn't pass the A-pose detection stage.</p>
+
+<p>Look in the log for an explanation as to why the A-pose cannot be detected or why it has been rejected.</p>
+
+<ul>
+    <li>Are any markers reported as missing? If yes:
+        <ul>
+            <li>Is the correct skeleton template being used?</li>
+            <li>Are all the required markers attached to the subject?</li>
+            <li>Does the subject calibration volume include all the reconstructions?</li>
+            <li><strong>Reminder:</strong> Missing markers will glow red.</li>
+        </ul>
+    </li>
+    <li>Does the subject also seem to have labeling issues? If yes:
+        <ul>
+            <li>If labeling clusters are attached to the subject, have you created them in Shogun? Have you verified that the labeling clusters you have created are selected?</li>
+            <li>Is the subject standing in a valid A-pose? A valid A-pose assumes that the subject:
+                <ul>
+                    <li>Stands straight</li>
+                    <li>Has their feet pointing forward (i.e., the feet are not splayed)</li>
+                    <li>Has their palms pointing to the floor</li>
+                    <li>Poses their arms at an angle of 45 degrees from the trunk</li>
+                    <li>Poses their arms in such a way that they lie in the plane of the torso.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Are there any joints reported as out-of-range? If yes:
+        <ul>
+            <li>Is the A-pose valid (see the above criteria)?</li>
+                            </div>
                         </div>
                     </div>
                 </div>
