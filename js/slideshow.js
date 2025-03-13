@@ -1,69 +1,117 @@
+// Add this improved slideshow.js code that properly scopes slideshows
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to set up any slideshow on the page
-    function setupSlideshow(container) {
-        // Find all elements for this specific slideshow
+    // Handle standard slideshows (marker-placement page)
+    initializeSlideshows('.slideshow-container');
+    
+    // Handle A-pose slideshow separately
+    initializeAposeSlideshows();
+    
+    // Handle ROM slideshows separately
+    initializeRomSlideshows();
+});
+
+function initializeSlideshows(containerSelector) {
+    const slideshowContainers = document.querySelectorAll(containerSelector);
+    
+    slideshowContainers.forEach(function(container) {
+        // Skip A-pose and ROM slideshows which have their own handlers
+        if (container.closest('#a-pose') || container.closest('#rom')) {
+            return;
+        }
+        
         const slides = container.querySelectorAll('.slide');
         const prevBtn = container.querySelector('.prev');
         const nextBtn = container.querySelector('.next');
         
-        // Find the parent section to get related slide-text elements
+        // Find the parent to get slide texts
         const parentSection = container.closest('.split-left');
         const slideTexts = parentSection ? parentSection.querySelectorAll('.slide-text') : [];
         
-        // Initialize the slide index
-        let currentSlideIndex = 0;
+        let currentIndex = 0;
         
-        // Function to show a specific slide
         function showSlide(n) {
-            // Hide all slides and texts
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].classList.remove('active');
-                if (slideTexts[i]) {
-                    slideTexts[i].classList.remove('active');
-                }
-            }
+            // Hide all slides
+            slides.forEach(slide => slide.style.display = 'none');
+            slideTexts.forEach(text => text.style.display = 'none');
             
-            // Handle index wrapping
-            currentSlideIndex = n;
-            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
-            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+            // Handle wrapping
+            currentIndex = n;
+            if (currentIndex >= slides.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = slides.length - 1;
             
-            // Show the active slide and corresponding text
-            slides[currentSlideIndex].classList.add('active');
-            if (slideTexts[currentSlideIndex]) {
-                slideTexts[currentSlideIndex].classList.add('active');
+            // Show active slide and text
+            slides[currentIndex].style.display = 'block';
+            if (slideTexts[currentIndex]) {
+                slideTexts[currentIndex].style.display = 'block';
             }
         }
         
-        // Event listener for previous button
+        // Set up button handlers
         if (prevBtn) {
-            prevBtn.addEventListener('click', function() {
-                showSlide(currentSlideIndex - 1);
-            });
+            prevBtn.onclick = function(e) {
+                e.stopPropagation(); // Prevent event bubbling
+                showSlide(currentIndex - 1);
+            };
         }
         
-        // Event listener for next button
         if (nextBtn) {
-            nextBtn.addEventListener('click', function() {
-                showSlide(currentSlideIndex + 1);
-            });
+            nextBtn.onclick = function(e) {
+                e.stopPropagation(); // Prevent event bubbling
+                showSlide(currentIndex + 1);
+            };
         }
         
-        // Initialize with the first slide
+        // Start with first slide
         showSlide(0);
+    });
+}
+
+// Separate handler for A-pose slideshow
+function initializeAposeSlideshows() {
+    const container = document.querySelector('#a-pose .slideshow-container');
+    if (!container) return;
+    
+    const slides = container.querySelectorAll('.slide');
+    const prevBtn = container.querySelector('.prev');
+    const nextBtn = container.querySelector('.next');
+    
+    let currentIndex = 0;
+    
+    function showSlide(n) {
+        // Hide all slides
+        slides.forEach(slide => slide.style.display = 'none');
+        
+        // Handle wrapping
+        currentIndex = n;
+        if (currentIndex >= slides.length) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = slides.length - 1;
+        
+        // Show active slide
+        slides[currentIndex].style.display = 'block';
     }
     
-    // =============================================================
-    // Set up regular slideshows (Marker Placement and A-pose)
-    // =============================================================
-    const slideshowContainers = document.querySelectorAll('.slideshow-container');
-    slideshowContainers.forEach(function(container) {
-        setupSlideshow(container);
-    });
+    // Set up button handlers
+    if (prevBtn) {
+        prevBtn.onclick = function(e) {
+            e.stopPropagation();
+            showSlide(currentIndex - 1);
+        };
+    }
     
-    // =============================================================
-    // Set up ROM slideshow specifically
-    // =============================================================
+    if (nextBtn) {
+        nextBtn.onclick = function(e) {
+            e.stopPropagation();
+            showSlide(currentIndex + 1);
+        };
+    }
+    
+    // Start with first slide
+    showSlide(0);
+}
+
+// Separate handler for ROM slideshow
+function initializeRomSlideshows() {
     const romSlidesContainer = document.querySelector('.rom-slideshow-container');
     
     if (romSlidesContainer) {
@@ -119,4 +167,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize with the first slide
         showRomSlide(0);
     }
-});
+}
